@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratory12_4", "Laboratory12_4\Laboratory12_4.csproj", "{22BBB79B-212C-4C10-9917-4048FEEA60B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLibrary", "CarLibrary\CarLibrary.csproj", "{1605158E-FF76-4F39-B3E6-E91B2CBB8750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D2A12522-A510-45F1-9158-7DBFA6545428}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22BBB79B-212C-4C10-9917-4048FEEA60B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BBB79B-212C-4C10-9917-4048FEEA60B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BBB79B-212C-4C10-9917-4048FEEA60B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BBB79B-212C-4C10-9917-4048FEEA60B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1605158E-FF76-4F39-B3E6-E91B2CBB8750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1605158E-FF76-4F39-B3E6-E91B2CBB8750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1605158E-FF76-4F39-B3E6-E91B2CBB8750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1605158E-FF76-4F39-B3E6-E91B2CBB8750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2A12522-A510-45F1-9158-7DBFA6545428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2A12522-A510-45F1-9158-7DBFA6545428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2A12522-A510-45F1-9158-7DBFA6545428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2A12522-A510-45F1-9158-7DBFA6545428}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
