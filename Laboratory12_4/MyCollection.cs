@@ -6,12 +6,12 @@ using System.Collections.Generic;
 public class MyCollection<T> : MyHashTable<T>, ICollection<T> where T : IInit, new()
 {
     public MyCollection() 
-        : base(item => item?.GetHashCode()) // Ключ по умолчанию — хеш объекта
+        : base(item => item?.GetHashCode())
     {
     }
 
-    public MyCollection(int length)
-        : base(item => item?.GetHashCode())
+    public MyCollection(int length, Func<T, object> keySelector, Func<object, object, bool> keyComparer = null)
+        : base(keySelector, keyComparer)
     {
         for (int i = 0; i < length; i++)
         {
@@ -21,24 +21,22 @@ public class MyCollection<T> : MyHashTable<T>, ICollection<T> where T : IInit, n
         }
     }
 
+
     public MyCollection(MyCollection<T> c)
         : base(item => item?.GetHashCode())
     {
         foreach (T item in c)
         {
-            Add(item);
+            Add((T)((ICloneable)item).Clone());
         }
     }
 
     public bool IsReadOnly => false;
 
-    // Реализация Add из ICollection<T>
-    void ICollection<T>.Add(T item) => Add(item);
-
     // Реализация Contains (использует Find)
     public bool Contains(T item)
     {
-        var key = item?.GetHashCode();
+        var key =  KeySelector(item);
         var found = Find(key);
         return found != null && found.Equals(item);
     }
@@ -51,14 +49,14 @@ public class MyCollection<T> : MyHashTable<T>, ICollection<T> where T : IInit, n
             if (arrayIndex >= array.Length)
                 throw new ArgumentException("Массив мал");
 
-            array[arrayIndex++] = item;
+            array[arrayIndex++] = (T)((ICloneable)item).Clone();
         }
     }
 
     // Удаление элемента по значению
-    public bool Remove(T item)
+    public new bool Remove(T item)
     {
-        var key = item?.GetHashCode();
+        var key = KeySelector(item);
         return base.Remove(key);
     }
 

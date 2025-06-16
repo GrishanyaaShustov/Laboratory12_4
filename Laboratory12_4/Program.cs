@@ -432,48 +432,113 @@ namespace Car
 
                         break;
                     case "4":
-                         Console.WriteLine("\n--- Демонстрация работы с интерфейсами ---");
+                        {
+                            MyCollection<Car> carsCollection = null;
+                            LightCar lastManualCar = null;
+                            bool exitSubMenu = false;
 
-                         Console.WriteLine("Демонстрация методов MyCollection<Car>");
+                            while (!exitSubMenu)
+                            {
+                                Console.WriteLine("\n--- Демонстрация работы с интерфейсами ---");
+                                Console.WriteLine("1. Создать коллекцию и сгенерировать 5 автомобилей");
+                                Console.WriteLine("2. Показать сгенерированные автомобили");
+                                Console.WriteLine("3. Добавить автомобиль вручную");
+                                Console.WriteLine("4. Проверить наличие вручную добавленного автомобиля (Contains)");
+                                Console.WriteLine("5. Удалить вручную добавленный автомобиль");
+                                Console.WriteLine("6. Проверить наличие после удаления");
+                                Console.WriteLine("7. Копировать коллекцию в массив и показать");
+                                Console.WriteLine("0. Вернуться в главное меню");
+                                Console.Write("Выберите действие: ");
+                                string subChoice = Console.ReadLine();
 
-                         // Создание коллекции и добавление случайных автомобилей
-                         MyCollection<Car> carsCollection = new MyCollection<Car>(5);
+                                switch (subChoice)
+                                {
+                                    case "1":
+                                        carsCollection = new MyCollection<Car>(
+                                            length: 5,
+                                            keySelector: car => car.CarId.Number,
+                                            keyComparer: (a, b) => (int)a == (int)b
+                                        );
+                                        lastManualCar = null;
+                                        Console.WriteLine("Коллекция создана и заполнена 5 случайными автомобилями.");
+                                        break;
 
-                         Console.WriteLine("Сгенерированные элементы:");
-                         foreach (var car in carsCollection)
-                             car.Show();
+                                    case "2":
+                                        if (carsCollection == null)
+                                            Console.WriteLine("Коллекция пуста. Сначала создайте коллекцию (пункт 1).");
+                                        else
+                                        {
+                                            Console.WriteLine("Сгенерированные элементы:");
+                                            foreach (var car in carsCollection)
+                                                car.Show();
+                                        }
+                                        break;
 
-                         // Добавление вручную
-                         var manualCar = new LightCar();
-                         manualCar.Init();
-                         carsCollection.Add(manualCar);
-                         Console.WriteLine("\nДобавлен вручную:");
+                                    case "3":
+                                        if (carsCollection == null)
+                                        {
+                                            Console.WriteLine("Коллекция пуста. Сначала создайте коллекцию (пункт 1).");
+                                        }
+                                        else
+                                        {
+                                            LightCar manualCar = new LightCar();
+                                            manualCar.RandomInit();
+                                            carsCollection.Add(manualCar);
+                                            lastManualCar = manualCar;
+                                            Console.WriteLine("Автомобиль добавлен вручную:");
+                                            manualCar.Show();
+                                        }
+                                        break;
 
-                         // Проверка Contains
-                         Console.WriteLine("\nПроверка наличия добавленного вручную автомобиля:");
-                         Console.WriteLine(carsCollection.Contains(manualCar) ? "Найден" : "Не найден");
+                                    case "4":
+                                        if (carsCollection == null || lastManualCar == null)
+                                            Console.WriteLine("Сначала создайте коллекцию и добавьте автомобиль вручную (пункты 1 и 3).");
+                                        else
+                                            Console.WriteLine(carsCollection.Contains(lastManualCar) ? "Найден" : "Не найден");
+                                        break;
 
-                         // Удаление
-                         Console.WriteLine("\nУдаление вручную добавленного автомобиля:");
-                         bool removed = carsCollection.Remove(manualCar);
-                         Console.WriteLine(removed ? "Удалён" : "Не найден");
+                                    case "5":
+                                        if (carsCollection == null || lastManualCar == null)
+                                            Console.WriteLine("Сначала создайте коллекцию и добавьте автомобиль вручную (пункты 1 и 3).");
+                                        else
+                                        {
+                                            bool removed = carsCollection.Remove(lastManualCar);
+                                            Console.WriteLine(removed ? "Удалён" : "Не найден");
+                                        }
+                                        break;
 
-                         // Копирование в массив
-                         Console.WriteLine("\nКопирование в массив:");
-                         Car[] array = new Car[carsCollection.Count];
-                         carsCollection.CopyTo(array, 0);
-                         foreach (var car in array)
-                             car.Show();
+                                    case "6":
+                                        if (carsCollection == null || lastManualCar == null)
+                                            Console.WriteLine("Сначала создайте коллекцию и добавьте автомобиль вручную (пункты 1 и 3).");
+                                        else
+                                            Console.WriteLine(carsCollection.Contains(lastManualCar) ? "Найден" : "Не найден");
+                                        break;
 
-                         // Перечисление через foreach
-                         Console.WriteLine("\nПеречисление через foreach:");
-                         foreach (var car in carsCollection)
-                             car.Show();
+                                    case "7":
+                                        if (carsCollection == null)
+                                            Console.WriteLine("Коллекция пуста. Сначала создайте коллекцию (пункт 1).");
+                                        else
+                                        {
+                                            Car[] array = new Car[carsCollection.Count];
+                                            carsCollection.CopyTo(array, 0);
+                                            Console.WriteLine("Содержимое массива:");
+                                            foreach (var car in array)
+                                                car.Show();
+                                        }
+                                        break;
 
-                         Console.WriteLine("\nНажмите любую клавишу для возврата в меню...");
-                         Console.ReadKey();
+                                    case "0":
+                                        exitSubMenu = true; // выйти из подменю, вернуться в главное меню
+                                        break;
 
-                         break;
+                                    default:
+                                        Console.WriteLine("Неверный пункт. Попробуйте ещё раз.");
+                                        break;
+                                }
+                            }
+
+                            break;
+                        }
                     case "0":
                         exitProgram = true;
                         break;

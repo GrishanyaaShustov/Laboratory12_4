@@ -39,7 +39,8 @@ public class MyHashTable<T>
     }
 
     public int Count => count;
-    public bool IsReadOnly => false; // Таблица изменяемая
+
+    public Func<T, object> KeySelector => keySelector;
 
     public int DefaultLength => defaultLength;
     public Point<T>[] Table => table;

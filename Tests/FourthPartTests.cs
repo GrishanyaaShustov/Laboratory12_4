@@ -33,14 +33,14 @@ namespace Tests
         [Test]
         public void ConstructorWithLength_CreatesSpecifiedNumberOfElements()
         {
-            var c = new MyCollection<Car.Car>(5);
+            var c = new MyCollection<Car.Car>(5, Car => Car.CarId.Number);
             Assert.That(c.Count, Is.EqualTo(5));
         }
 
         [Test]
         public void CopyConstructor_CopiesElements()
         {
-            var original = new MyCollection<Car.Car>(3);
+            var original = new MyCollection<Car.Car>(3, Car => Car.CarId.Number);
             var copy = new MyCollection<Car.Car>(original);
 
             Assert.Multiple(() =>
